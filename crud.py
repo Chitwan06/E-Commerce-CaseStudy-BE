@@ -282,6 +282,25 @@ def remove_from_cart(db: Session, cart_id: int):
     db.commit()
     return True
 
+def update_cart_quantity(db: Session, cart_id: int, quantity: int):
+    cart_item = db.query(databasemodels.Cart).filter(databasemodels.Cart.id == cart_id).first()
+    if not cart_item:
+        raise ValueError("Cart item not found")
+
+    if quantity <= 0:
+        raise ValueError("Invalid quantity")
+
+    # Stock check
+    product = get_product_by_id(db, cart_item.product_id)
+    if product and quantity > product.stock:
+        raise ValueError("Quantity exceeds available stock")
+
+    cart_item.quantity = quantity
+    db.commit()
+    db.refresh(cart_item)
+    return cart_item
+
+
 
 # ---------------- ORDER -----------------
 def create_order(db: Session, user_id: int, order_data: schemas.OrderCreate):
