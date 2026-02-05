@@ -15,6 +15,7 @@ database.init_db()
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "https://ekart-frontend-psi.vercel.app"
 ]
 
 app.add_middleware(
