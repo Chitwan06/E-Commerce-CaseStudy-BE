@@ -16,7 +16,7 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "https://ekart-frontend-psi.vercel.app",
-    "https://ecommercefe-bice.vercel.app/"
+    "https://ecommerce-dusky-phi-36.vercel.app"
 ]
 
 app.add_middleware(
